@@ -35,3 +35,4 @@ npm run dev
 npm run build
 ```
 Cloudflare deployment refresh
+Deploy static assets
