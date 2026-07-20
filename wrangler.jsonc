@@ -1,9 +1,8 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "savoy-cigar-kaohsiung",
+  "name": "savoyflagship",
   "main": "./worker/index.ts",
   "compatibility_date": "2026-07-20",
-  "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true
   }
