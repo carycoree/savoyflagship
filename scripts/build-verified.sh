@@ -4,7 +4,10 @@ set -euo pipefail
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ "${SITES_ENV_READY:-}" != "1" ]]; then
-  exec "${script_dir}/sites-env.sh" -- "$0" "$@"
+  # GitHub's browser-based ZIP upload may not preserve executable bits.
+  # Invoke both shell scripts explicitly through bash so CI does not rely
+  # on those file permissions being present.
+  exec bash "${script_dir}/sites-env.sh" -- bash "${script_dir}/build-verified.sh" "$@"
 fi
 
 command -v timeout >/dev/null || {
@@ -25,4 +28,4 @@ timeout \
   "${SITES_BUILD_TIMEOUT:-3m}" \
   "${vinext}" build
 
-"${script_dir}/validate-artifact.sh"
+bash "${script_dir}/validate-artifact.sh"
